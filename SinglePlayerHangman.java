@@ -182,6 +182,10 @@ public class SinglePlayerHangman implements Hangmanprocess {
 
       Scanner s = new Scanner (System.in);
       choice = s.nextLine().charAt(0);
+      while (!(choice == 'N' || choice == 'Y')) {
+      System.out.println("Sorry! Please enter either 'N' or 'Y'.");
+      choice = s.nextLine().charAt(0); //charAt picks up the first element, so even if the user enters eg: 'cat', the computer will pick up 'C'
+    }
       choice = Character.toUpperCase(choice); //user might input small y, so computer must convert it to become upper case so it can compare to loop
 
     } while(choice == 'Y');
@@ -267,9 +271,14 @@ public class SinglePlayerHangman implements Hangmanprocess {
   public static int findEmptyPosition(char[] enteredLetters) {
 
     /*  Add logic   */
-    int i = 0;
-        while (enteredLetters[i] != '\u0000') i++;
-        return i;
+    int i;
+        for (i=0; i< enteredLetters.length; i++){
+            if (enteredLetters[i] == '\u0000'){
+                return i;
+            }
+            
+        }
+        return i;    
   }
 
 }

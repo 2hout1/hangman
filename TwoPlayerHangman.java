@@ -21,9 +21,10 @@ public class TwoPlayerHangman implements Hangmanprocess {
   private static String wordToGuess;
   private static boolean wordIsGuessed;
   private static String playerOneName;
-
+  private static char choice;
   public void process() {
-
+    
+    do{
     Scanner scan = new Scanner (System.in);
     char guessedCharacter;
 
@@ -90,6 +91,21 @@ public class TwoPlayerHangman implements Hangmanprocess {
     }else{
       System.out.println("Better luck next time. The word was: " + wordToGuess);
     }
+    
+    
+    System.out.println("Would you like to play again? (Y/N)");
+
+      Scanner s = new Scanner (System.in);
+      choice = s.nextLine().charAt(0);
+      while (!(choice == 'N' || choice == 'Y')) {
+      System.out.println("Sorry! Please enter either 'N' or 'Y'.");
+      choice = s.nextLine().charAt(0); //charAt picks up the first element, so even if the user enters eg: 'cat', the computer will pick up 'C'
+    }
+      choice = Character.toUpperCase(choice); //user might input small y, so computer must convert it to become upper case so it can compare to loop
+
+    } while(choice == 'Y');
+
+    System.out.println("Thank you for playing. See you next time!");
 
   }
 }
