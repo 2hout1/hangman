@@ -5,6 +5,7 @@
  */
 package hangman;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Hangman {
   //private Player p1;
@@ -15,12 +16,33 @@ public class Hangman {
    
     System.out.println("Enter choice (1 for Single player and 2 for Double player)");
     Scanner sc=new Scanner(System.in);
+    boolean validInput = false;
+    int choice = 0;
+    while (!validInput){
+    try{    
+        choice=sc.nextInt();
+        while (choice<0 || choice>3) {
+         System.out.println("Pls select either 1 or 2");
+         sc.nextLine();
+         choice=sc.nextInt();
+    }
+        validInput=true;
+    }catch (InputMismatchException e){
+           System.out.println("InputMismatch, please enter the number: ");
+            sc.nextLine();
+        }
+    }
+    
+    /**
+    Scanner sc=new Scanner(System.in);
     int choice=sc.nextInt();
 
     while (choice<0 || choice>3) {
       System.out.println("Pls select either 1 or 2");
       choice=sc.nextInt();
     }
+    * 
+    **/
 
     if (choice == 1)
       h = new SinglePlayerHangman();

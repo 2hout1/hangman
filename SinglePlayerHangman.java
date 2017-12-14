@@ -45,14 +45,6 @@ public class SinglePlayerHangman implements Hangmanprocess {
 
     String [] wordListLevelFive = {"meticulous", "predicament", "amalgamate", "fastidious", "ebullient", "denigrate", "acquiesce", "harangue", "insubordinate", "contingent"};
 
-    // Create an array to store already entered letters
-    /**
-    char[] enteredLettersOne = new char[wordListLevelOne[randomWordNumberOne].length()]; //creates an array for the word
-    char[] enteredLettersTwo = new char [wordListLevelTwo[randomWordNumberTwo].length()];
-    char[] enteredLettersThree = new char [wordListLevelThree[randomWordNumberThree].length()];
-    char[] enteredLettersFour = new char [wordListLevelFour[randomWordNumberFour].length()];
-    char[] enteredLettersFive = new char [wordListLevelFive[randomWordNumberFive].length()];
-    **/
     
     System.out.println("Hello! This is the single player section of Hangman, where you can expand your vocabulary!");
     System.out.println(" ");

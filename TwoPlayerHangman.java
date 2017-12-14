@@ -34,15 +34,27 @@ public class TwoPlayerHangman implements Hangmanprocess {
     playerOneName = scan.nextLine();
     System.out.println("Welcome, " + playerOneName + "! Please enter the word you wish to be guessed.");
 
-    wordToGuess = scan.next(); // Player One inputs the word
+    wordToGuess = scan.next().toLowerCase(); // Player One inputs the word
     word_length = wordToGuess.length(); // The game retrieves the length of the word and puts each letter into an array
+    
     System.out.println("Please enter the number of guesses you will allow Player 2 to have. (minimum of " + word_length + " guesses!)");
-    numberOfTries = scan.nextInt(); // Player One inputs the number of guesses allowed.
-
-    while (numberOfTries == 0 || numberOfTries < word_length) {
-        System.out.println("Sorry! You must give a minimum of " + word_length + " guesses!");
+    boolean validInput = false;
+    while (!validInput){
+    try{    
         numberOfTries = scan.nextInt();
+        while (numberOfTries == 0 || numberOfTries < word_length || numberOfTries > 15) {
+        System.out.println("Sorry! You must give a minimum of " + word_length + " guesses, and a maximum of 15 guesses");
+        scan.nextLine();
+        numberOfTries = scan.nextInt();   
     }
+        validInput=true;
+    }catch (InputMismatchException e){
+           System.out.println("InputMismatch, please enter the number: ");
+            scan.nextLine();
+        }
+    }
+     // Player One inputs the number of guesses allowed.
+
 
     System.out.print('\u000C');
 
@@ -66,9 +78,11 @@ public class TwoPlayerHangman implements Hangmanprocess {
     while((new String(revealedLetters)).contains("*") && numberGuessedFalse<numberOfTries){      // while x stills contains _
 
       // fill logic
+      char userInput = '\u0000';
+      try {
       System.out.println("(Guess) Enter a letter in word ");
       Scanner input = new Scanner(System.in);
-      char userInput = input.nextLine().charAt(0);
+      userInput = input.nextLine().charAt(0);
       int matchedCharAt = wordToGuess.indexOf(userInput);
       if (matchedCharAt != -1) {
         revealedLetters[matchedCharAt] = userInput;
@@ -84,6 +98,9 @@ public class TwoPlayerHangman implements Hangmanprocess {
         numberGuessedFalse++;
         System.out.println("Oops!" + numberGuessedFalse + " of " + numberOfTries + " wrong guesses: " + new String(revealedLetters));
       }
+      } catch (StringIndexOutOfBoundsException str) {
+      System.out.println(userInput + " is not in the word");
+    }
     }
 
     if (!new String(revealedLetters).contains("*")){
